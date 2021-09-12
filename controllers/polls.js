@@ -19,3 +19,10 @@ module.exports.createPoll = async(req, res) => {
     console.log(poll)
     console.log(req.body.poll)
 };
+
+
+
+module.exports.showAllPolls = async(req, res) => {
+    const polls = await Poll.find({});
+    res.render("polls/show_all", {polls});
+};

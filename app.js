@@ -36,6 +36,6 @@ app.get('*', (req, res) => {
     res.send("Error 404, page not found");
 });
 
-const port = process.env.port || 3000;
+const port = process.env.port || 3300;
 app.listen(port, ()=>console.log(`Listening on port ${port}`));
 

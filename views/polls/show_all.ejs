@@ -1,0 +1,60 @@
+<% layout('layouts/boilerplate'); %> 
+
+<div class="container d-felx col-lg-8 mx-auto ">
+    <h1 class="display-6 mb-4">All Polls</h1>
+    
+    <% for(let poll of polls){ %> 
+        <div class="card mb-3">
+            <div class="card-header text-muted">
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <p class="m-0">data goes here</p> 
+                    <span class="d-inline-flex">
+                        <button class="m-1 p-1 btn text-muted"><i class="bi bi-sliders"></i></button>
+                        <button class="m-1 p-1 btn text-muted"><i class="bi bi-pencil-square"></i></button>
+                        <button class="m-1 p-1 btn text-muted"><i class="bi bi-gear-fill"></i></button>
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><%- poll.title %></h5>
+                <p class="card-text"><%- poll.description %></p>
+                <button class="btn btn-outline-primary share-btn" data-id="<%-poll.id%>">Get Sharable Link</button>
+                <a href="polls/<%-poll.id%>" class="btn btn-outline-success">Vote</a>
+            </div>
+        </div>
+    <% } %> 
+</div>
+
+
+
+
+<script>
+    const share_btns = document.querySelectorAll('.share-btn');
+    share_btns.forEach((share_btn, idx)=>{
+        share_btn.addEventListener('click', (e)=>{
+            const link = `${window.location.host}/polls/${share_btn.getAttribute("data-id")}`
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(link);
+            makeAlert(link);
+        });
+    });
+
+    
+    function makeAlert(text){
+        const newElement = document.createElement('span');
+        document.body.appendChild(newElement);
+        newElement.outerHTML = `
+        <div class="alert alert-warning alert-dismissible fade show position-absolute" role="alert"
+        style="z-index: 1000; bottom: 50px; right:15px; overflow:auto;">
+            Copied the sharable link
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+
+        setTimeout(()=>{
+            document.querySelector('.alert.alert-warning.alert-dismissible.fade.show.position-absolute').remove();
+        }, 5000);
+
+        return newElement;
+    }
+</script>
