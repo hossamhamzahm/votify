@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column vh-100 jus">
+
+    <%- include('../partials/navbar.ejs'); %> 
+
+    <main>
+        <div class="container-fluid mt-5">
+            <%- body %>
+        </div>
+    </main>
+
+
+    <%- include('../partials/footer.ejs') %> 
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const poll_form = document.getElementById('poll_search_form');
+        const input = document.getElementById('poll_id');
+
+        poll_form.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            poll_form.setAttribute('action',poll_form.getAttribute('action') + `${input.value}`);
+            window.location.replace(poll_form.getAttribute('action'));
+        });
+    </script>
+</body>
+</html>

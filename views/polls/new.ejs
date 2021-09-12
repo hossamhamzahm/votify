@@ -1,0 +1,61 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container d-flex ">
+        <div class="mx-auto col-md-9 col-lg-6">
+            <h1 class="display-6 text-center">Create a New Poll</h1>
+            <form class="needs-validation border rounded-3 p-4 my-5" action="/polls" method="POST"
+                novalidate>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Poll Title</label>
+                    <input type="text" class="form-control" id="title" name="poll[title]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        You must enter a title for the poll
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Poll Description</label>
+                    <textarea class="form-control" name="poll[description]" id="description" style="height: 100px"></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <label for="opt-creator" class="form-label">Add Option(s)</label>
+                
+                <div id="opts-div" class="p-0 m-0">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="opt-creator">
+                    <span id="add-opt-btn" class="input-group-text btn btn-secondary" id="basic-addon1"><i
+                            class="bi bi-plus-lg"></i></span>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        You must enter a non-negative number for the campground price
+                    </div>
+                </div>
+
+                <div class="form-check ms-2 my-3">
+                    <input class="form-check-input fs-5" type="checkbox" name="poll[add-opt]" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Allow others to add additional options
+                    </label>
+                </div>
+                <div class="form-check ms-2 my-3">
+                    <input class="form-check-input fs-5" type="checkbox" id="flexCheckChecked" name="poll[multi-opt]" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Allow multiple choices
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Create Poll</button>
+            </form>
+        </div>
+    </div>
+
+<script src="/js/polls_new.js"></script>
