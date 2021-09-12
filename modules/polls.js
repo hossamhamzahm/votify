@@ -37,7 +37,7 @@ const pollSchema = new Schema({
         type: Boolean,
         required: true
     },
-    mutli_opt: {
+    multi_opt: {
         type: Boolean,
         required: true
     }
