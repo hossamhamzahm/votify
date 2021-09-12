@@ -24,11 +24,20 @@ const pollSchema = new Schema({
     // voters:[{
     //     users
     // }],
+    // author:{
+    //      type: 
+    //      required: true
+    // }
+    description: String,
     total_num:{
         type: Number,
         required: true
     },
-    adding_opt:{
+    add_opt: {
+        type: Boolean,
+        required: true
+    },
+    mutli_opt: {
         type: Boolean,
         required: true
     }
