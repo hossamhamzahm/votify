@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid m-1">
-        <a class="navbar-brand" href="#">Votify</a>
+        <a class="navbar-brand" href="/">Votify</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,16 +9,30 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Create</a>
+                    <a class="nav-link active" aria-current="page" href="/polls/new">Create</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Show</a>
+                    <a class="nav-link" href="/polls">Show</a>
                 </li>
             </ul>
             <form id="poll_search_form" action="/polls/" class="d-flex" method="GET">
                 <input class="form-control me-2" name="poll_id" id="poll_id" type="search" placeholder="Enter Poll ID" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Find</button>
+                <button id="poll_search_btn" class="btn btn-outline-success" type="submit">Find</button>
             </form>
         </div>
     </div>
 </nav>
+
+
+<script>
+    const find_form = document.getElementById("poll_search_form")
+    const find_btn = document.getElementById("poll_search_btn")
+    find_btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+
+        const poll_id = find_form.firstElementChild.value
+        find_form.setAttribute('action', `/polls/${poll_id}`)
+
+        find_form.submit()
+    });
+</script>

@@ -8,7 +8,10 @@ router.get('/new', (req, res) => {
     res.render('polls/new');
 });
 
+router.get('/:id', pollsController.show);
+
 
 router.post('/', pollsController.createPoll);
+
 
 module.exports = router;

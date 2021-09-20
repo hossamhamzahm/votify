@@ -4,6 +4,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const polls_router = require('./routes/polls');
+const opts_router = require('./routes/opts');
 const app = express();
 
 
@@ -29,6 +30,7 @@ app.use(methodOverride('_method'));
 
 
 app.use('/polls', polls_router);
+app.use('/polls/:id/opts', opts_router);
 app.get('/', (req, res) => {
     res.render('home');
 });
@@ -36,6 +38,6 @@ app.get('*', (req, res) => {
     res.send("Error 404, page not found");
 });
 
-const port = process.env.port || 3300;
+const port = process.env.port || 3000;
 app.listen(port, ()=>console.log(`Listening on port ${port}`));
 

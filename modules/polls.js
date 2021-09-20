@@ -2,17 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const optSchema = new Schema({
-    val:{
-        type: String,
-        required: true
-    },
-    num_of_votes:{
-        type: Number,
-        required: true
-    },
-    // voters: [users]
-});
+
+
 
 
 const pollSchema = new Schema({
@@ -20,7 +11,10 @@ const pollSchema = new Schema({
         type: String,
         required: true
     },
-    opts:[optSchema],
+    opts:[{
+        type: mongoose.Types.ObjectId,
+        ref: "Opt"
+    }],
     // voters:[{
     //     users
     // }],
