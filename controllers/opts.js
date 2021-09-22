@@ -10,6 +10,12 @@ module.exports.editOpts = async(req, res) => {
     let idx = 0
     for(let req_opt of req_opts.opt_id){
         const opt = await Opt.findById(req_opt);
+        if (opt.num_of_votes > req_opts.num_of_votes[idx]) {
+            opt.voters.pull({ _id: req.user.id })
+        }
+        else if (opt.num_of_votes < req_opts.num_of_votes[idx]) {
+            opt.voters.push({ _id: req.user.id })
+        }
         opt.num_of_votes = req_opts.num_of_votes[idx]
         poll.total_num += parseInt(req_opts.num_of_votes[idx])
         await opt.save()

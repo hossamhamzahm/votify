@@ -1,0 +1,35 @@
+<%- layout('layouts/boilerplate.ejs') %>
+
+<div class="container d-flex">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <h1 class="display-6 mb-5">Login</h1>
+        <form action="/login" method="Post" class="needs-validation" : novalidate>
+
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                    aria-label="username" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
+                <div class="invalid-feedback">
+                    This field cannot be empty
+                </div>
+            </div>
+
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" name="password" id="password"
+                    placeholder="Password" aria-label="password" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
+                <div class="invalid-feedback">
+                    This field cannot be empty
+                </div>
+            </div>
+
+            <button class="btn btn-success mb-3">Login</button>
+        </form>
+    </div>
+</div>

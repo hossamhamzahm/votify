@@ -14,6 +14,7 @@
 
     <main>
         <div class="container-fluid mt-5">
+            <%- include('../partials/flash.ejs'); %> 
             <%- body %>
         </div>
     </main>
@@ -21,6 +22,7 @@
 
     <%- include('../partials/footer.ejs') %> 
     <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/index.js"></script>
     <script>
         const poll_form = document.getElementById('poll_search_form');
         const input = document.getElementById('poll_id');

@@ -19,6 +19,22 @@
                 <input class="form-control me-2" name="poll_id" id="poll_id" type="search" placeholder="Enter Poll ID" aria-label="Search">
                 <button id="poll_search_btn" class="btn btn-outline-success" type="submit">Find</button>
             </form>
+            <% if(!currentUser){ %>
+                <ul class="navbar-nav my-2 ms-lg-3 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">register</a>
+                    </li>
+                </ul>
+            <% }else{ %> 
+                <ul class="navbar-nav my-2 ms-lg-3 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">logout</a>
+                    </li>
+                </ul>
+            <% } %> 
         </div>
     </div>
 </nav>

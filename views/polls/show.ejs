@@ -5,12 +5,14 @@
     <div class="card mb-3">
         <div class="card-header text-muted">
             <div class="d-flex flex-row justify-content-between align-items-center">
-                <p class="m-0">Author</p>
+                <p class="m-0"><%- `Poll created by ${poll.author.f_name}` %> </p>
+                <% if(currentUser && poll.author.id == currentUser.id){ %> 
                 <span class="d-inline-flex">
-                    <button class="m-1 p-1 btn text-muted"><i class="bi bi-sliders"></i></button>
-                    <button class="m-1 p-1 btn text-muted"><i class="bi bi-pencil-square"></i></button>
-                    <button class="m-1 p-1 btn text-muted"><i class="bi bi-gear-fill"></i></button>
+                    <a class="m-1 p-1 text-muted btn" title="Settings"><i class="bi bi-sliders"></i></a>
+                    <a class="m-1 p-1 text-muted btn" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                    <!-- <button class="m-1 p-1 btn text-muted"><i class="bi bi-gear-fill"></i></button> -->
                 </span>
+                <% } %> 
             </div>
         </div>
         <div class="card-body">
@@ -26,7 +28,13 @@
                         <li class="list-group-item border-0">
                             <div class="form-check">
                                 <input class="form-check-input fs-5" type="<%- poll.multi_opt ? 'checkbox' : 'radio' %>"
-                                    id="flexCheckChecked" name="radio">
+                                    id="flexCheckChecked" name="radio"
+                                    <% if(currentUser){ %>
+                                    <% for(let voter of opt.voters){ %>  
+                                        <%- voter.id == currentUser.id ? 'checked' : '' %> 
+                                    <% } %> 
+                                    <% } %> 
+                                    >
                                 <input class="d-none" type="text" name="opts[opt_id][]" value="<%-opt.id%>">
                                 <input class="d-none" type="number" name="opts[num_of_votes][]" value="<%-opt.num_of_votes%>">
                                 <label class="form-check-label fs-6 border rounded w-100 h-100 position-relative"
@@ -36,7 +44,7 @@
                                     </div>
                                     <span class="position-absolute text-center d-inline-block .bg-transparent rounded px-3 w-100 end-0">
                                         <%- opt.val %>
-                                    </span>
+                                    </span>  
                                 </label>
                             </div>
                         </li>

@@ -1,5 +1,6 @@
 const Poll = require('../modules/polls');
 const Opt = require('../modules/opts');
+const User = require('../modules/users');
 
 
 module.exports.createPoll = async(req, res) => {
@@ -10,6 +11,7 @@ module.exports.createPoll = async(req, res) => {
     req.body.poll.opts = []
     req.body.poll.total_num = 0;
     const poll = new Poll(req.body.poll);
+    const user = await User.findById(req.user.id)
 
     opts.forEach((opt, idx)=>{
         opts[idx] = {
@@ -19,26 +21,31 @@ module.exports.createPoll = async(req, res) => {
         };
     })
 
-    saved_opts =  await Opt.insertMany(opts)
-    poll.opts = saved_opts
+    saved_opts =  await Opt.insertMany(opts);
+    poll.opts = saved_opts;
+    poll.author = req.user.id;
+    user.polls.push(poll)
 
-
-    await poll.save().
-    then(() => res.redirect('/polls')).
-    catch((E) => console.log(E, poll));
-    console.log(poll)
-    console.log(req.body.poll)
+    await poll.save()
+    await user.save()
+    res.redirect('/polls')
 };
 
 
 
+module.exports.renderNew = (req, res) => {
+    res.render('polls/new');
+};
+
+
 module.exports.showAllPolls = async (req, res) => {
-    const polls = await Poll.find({});
+    const user = await User.findById(req.user.id).populate('polls');
+    const polls = user.polls;
     res.render("polls/show_all", { polls });
 };
 
 module.exports.show = async (req, res) => {
-    const poll = await Poll.findById(req.params.id).populate('opts')
+    const poll = await Poll.findById(req.params.id).populate('opts').populate('author');
     // console.log(poll);
     res.render('polls/show', {poll});
 };

@@ -2,7 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-
+const voterSchema = new Schema({
+    voter:{
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    }
+});
 
 
 
@@ -15,13 +21,12 @@ const pollSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: "Opt"
     }],
-    // voters:[{
-    //     users
-    // }],
-    // author:{
-    //      type: 
-    //      required: true
-    // }
+    voters:[voterSchema],
+    author:{
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     description: String,
     total_num:{
         type: Number,
