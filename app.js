@@ -33,17 +33,18 @@ app.set('views', path.join(__dirname, "views"))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(express.json())
 
 const sessionConfig = {
     // name: 'blah',
     // store: store,
-    secret: /*secret || */"this is a secret",
+    secret: process.env.SECRET || "this is a secret",
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
         // secure: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
         maxAge: 1000 * 60 * 60 * 24 * 7,
     }
 }
@@ -64,15 +65,18 @@ app.use((req, res, next)=>{
 });
 
 
+// Routers
 app.use('/polls', polls_router);
-app.use('/', users_router);
 app.use('/polls/:id/opts', opts_router);
+app.use('/', users_router);
 app.get('/', (req, res) => {
     res.render('home');
 });
+// Not found route
 app.get('*', (req, res) => {
     res.send("Error 404, page not found");
 });
+
 
 const port = process.env.port || 3000;
 app.listen(port, ()=>console.log(`Listening on port ${port}`));

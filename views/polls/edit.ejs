@@ -1,0 +1,103 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container d-flex ">
+    <div class="mx-auto col-md-9 col-lg-6">
+        <h1 class="display-6 text-center">Edit Poll</h1>
+        <div class="border rounded-3 p-4 my-5">
+            <form class="needs-validation " action="/polls/<%- poll.id %>?_method=PUT" method="POST" novalidate>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Poll Title</label>
+                    <input type="text" class="form-control" id="title" name="poll[title]" required
+                    value="<%- poll.title %>">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        You must enter a title for the poll
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Poll Description</label>
+                    <textarea class="form-control" name="poll[description]" id="description"
+                        style="height: 100px"><%- poll.description %></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <label for="opt-creator" class="form-label">Add Option(s)</label>
+
+                <div id="opts-div" class="p-0 m-0">
+                    <% for(let opt of poll.opts){ %>
+                    <div class="input-group mb-3">
+                        <div class="form-control p-0 d-flex justify-content-between align-items-center">
+                            <p class="d-inline-block p-0 ps-2 m-0">
+                                <%- opt.val %>
+                            </p>
+                            <span class="btn btn-secondary d-inline-block rounded-0 remove-opt" data-id="<%- opt.id %>">
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="opt-creator">
+                    <span id="add-opt-btn" class="input-group-text btn btn-secondary" id="basic-addon1"><i
+                            class="bi bi-plus-lg"></i></span>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        You must enter a non-negative number for the campground price
+                    </div>
+                </div>
+
+                <div class="form-check ms-2 my-3">
+                    <input class="form-check-input fs-5" type="checkbox" name="poll[add_opt]" id="flexCheckChecked"
+                        <%- poll.add_opt ? "checked" : '' %>>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Allow others to add additional options
+                    </label>
+                </div>
+                <div class="form-check ms-2 my-3">
+                    <input class="form-check-input fs-5" type="checkbox" id="flexCheckChecked" name="poll[multi_opt]"
+                        <%- poll.multi_opt ? "checked" : '' %> >
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Allow multiple choices
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-outline-success d-inline-block">Submit changes</button>
+                <button class="btn btn-outline-danger d-inline-block" data-bs-toggle="modal" data-bs-target="#deleteModal">Remove Poll</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Removing <%- poll.title %>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancel</button>
+                <form class="d-inline-block" action="/polls/<%- poll.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-outline-danger d-inline-block" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Remove Poll</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/polls/edit.js"></script>

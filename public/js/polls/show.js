@@ -25,7 +25,7 @@ check_opt.forEach((opt, idx)=>{
 
 
 
-sharable_btn.addEventListener('click', (e) => {
+sharable_btn.addEventListener('click', async(e) => {
     e.preventDefault();
     const link = `${window.location.host}/polls/${sharable_btn.getAttribute("data-id")}`
 
@@ -33,6 +33,7 @@ sharable_btn.addEventListener('click', (e) => {
     navigator.clipboard.writeText(link);
     makeAlert();
 });
+
 
 /* let form_data;
 

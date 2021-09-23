@@ -3,7 +3,7 @@ const Opt = require('../modules/opts');
 const User = require('../modules/users');
 
 
-module.exports.createPoll = async(req, res) => {
+module.exports.createPoll = async (req, res) => {
     req.body.poll["multi_opt"] = req.body.poll["multi_opt"] ? true : false;
     req.body.poll["add_opt"] = req.body.poll["add_opt"] ? true : false;
 
@@ -13,7 +13,7 @@ module.exports.createPoll = async(req, res) => {
     const poll = new Poll(req.body.poll);
     const user = await User.findById(req.user.id)
 
-    opts.forEach((opt, idx)=>{
+    opts.forEach((opt, idx) => {
         opts[idx] = {
             val: opt,
             num_of_votes: 0,
@@ -21,7 +21,7 @@ module.exports.createPoll = async(req, res) => {
         };
     })
 
-    saved_opts =  await Opt.insertMany(opts);
+    saved_opts = await Opt.insertMany(opts);
     poll.opts = saved_opts;
     poll.author = req.user.id;
     user.polls.push(poll)
@@ -32,9 +32,36 @@ module.exports.createPoll = async(req, res) => {
 };
 
 
+module.exports.editPoll = async (req, res) => {
+    const poll = await Poll.findById(req.params.id);
+    poll.title = req.body.poll.title;
+    poll.description = req.body.poll.description;
+    poll["multi_opt"] = req.body.poll["multi_opt"] ? true : false;
+    poll["add_opt"] = req.body.poll["add_opt"] ? true : false;
+    await poll.save()
+    res.redirect(`/polls/${req.params.id}/`)
+};
+
+
+module.exports.deletePoll = async (req, res) => {
+    const poll = await Poll.findById(req.params.id) //.populate('opts')
+    const author = await User.findById(poll.author)
+    
+    await Opt.deleteMany({ _id: { $in: poll.opts } })
+    await author.updateOne({ $pull: { polls: { _id: { $in: poll.opts}}}})
+    await Poll.findByIdAndDelete(req.params.id);
+    res.redirect('/polls')
+};
+
 
 module.exports.renderNew = (req, res) => {
     res.render('polls/new');
+};
+
+
+module.exports.renderEdit = async(req, res) => {
+    const poll = await Poll.findById(req.params.id).populate('opts')
+    res.render('polls/edit', {poll});
 };
 
 
@@ -46,7 +73,6 @@ module.exports.showAllPolls = async (req, res) => {
 
 module.exports.show = async (req, res) => {
     const poll = await Poll.findById(req.params.id).populate('opts').populate('author');
-    // console.log(poll);
     res.render('polls/show', {poll});
 };
 

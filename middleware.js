@@ -4,7 +4,6 @@ const Poll = require('./modules/polls');
 
 
 
-
 module.exports.isLogged = async (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl;
@@ -13,8 +12,6 @@ module.exports.isLogged = async (req, res, next) => {
     }
     next();
 };
-
-
 
 module.exports.isPollAuthor = async (req, res, next) => {
     const poll = await Poll.findById(req.params.id);

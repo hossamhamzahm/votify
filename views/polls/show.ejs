@@ -8,9 +8,7 @@
                 <p class="m-0"><%- `Poll created by ${poll.author.f_name}` %> </p>
                 <% if(currentUser && poll.author.id == currentUser.id){ %> 
                 <span class="d-inline-flex">
-                    <a class="m-1 p-1 text-muted btn" title="Settings"><i class="bi bi-sliders"></i></a>
-                    <a class="m-1 p-1 text-muted btn" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                    <!-- <button class="m-1 p-1 btn text-muted"><i class="bi bi-gear-fill"></i></button> -->
+                    <a href="/polls/<%- poll.id %>/edit" class="m-1 p-1 btn text-muted"><i class="bi bi-sliders"></i></a>
                 </span>
                 <% } %> 
             </div>
