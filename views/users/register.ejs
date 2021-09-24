@@ -1,83 +1,81 @@
 <%- layout('layouts/boilerplate.ejs') %>
 
-<div class="container d-flex">
-    <div class="col-12 col-md-8 col-lg-6 mx-auto">
-        <h1 class="display-6 mb-5">Register</h1>
-        <form action="/register" method="Post" class="needs-validation" novalidate>
 
-            <label for="first-name" class="form-label">First Name</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="user[f_name]" id="first-name" placeholder="First Name"
-                    aria-label="Email" required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-                <div class="invalid-feedback">
-                    This field must contain a valid email
-                </div>
-            </div>
+<h1 class="display-6 mb-3">Register</h1>
+<form action="/register" method="Post" class="needs-validation" novalidate>
 
-            <label for="last-name" class="form-label">Last Name</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="user[l_name]" id="last-name" placeholder="Last Name"
-                    aria-label="Email" required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-                <div class="invalid-feedback">
-                    This field must contain a valid email
-                </div>
-            </div>
-            
-            <label for="user-email" class="form-label">Email</label>
-            <div class="input-group mb-3">
-                <input type="email" class="form-control" name="user[email]" id="user-email" placeholder="Email"
-                    aria-label="Email" required>
-                <span class="input-group-text" id="user-email">@</span>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-                <div class="invalid-feedback">
-                    This field must contain a valid email
-                </div>
-            </div>
-
-            <label for="username" class="form-label">Username</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="user[username]" id="username" placeholder="Username" aria-label="username" required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-                <div class="invalid-feedback">
-                    This field cannot be empty
-                </div>
-            </div>
-
-
-            <label for="phone" class="form-label">Phone</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="user[phone]" id="phone" placeholder="Phone Number"
-                    aria-label="phone" required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-                <div class="invalid-feedback">
-                    This field cannot be empty
-                </div>
-            </div>
-
-            <label for="password" class="form-label">Password</label>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password" aria-label="password" required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-                <div class="invalid-feedback">
-                    This field cannot be empty
-                </div>
-            </div>
-
-            <button class="btn btn-success mb-3">Register</button>
-        </form>
+    <label for="first-name" class="form-label">First Name</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="user[f_name]" id="first-name" placeholder="First Name"
+            aria-label="Email" required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+        <div class="invalid-feedback">
+            This field must contain a valid email
+        </div>
     </div>
-</div>
+
+    <label for="last-name" class="form-label">Last Name</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="user[l_name]" id="last-name" placeholder="Last Name"
+            aria-label="Email" required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+        <div class="invalid-feedback">
+            This field must contain a valid email
+        </div>
+    </div>
+    
+    <label for="user-email" class="form-label">Email</label>
+    <div class="input-group mb-3">
+        <input type="email" class="form-control" name="user[email]" id="user-email" placeholder="Email"
+            aria-label="Email" required>
+        <span class="input-group-text" id="user-email">@</span>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+        <div class="invalid-feedback">
+            This field must contain a valid email
+        </div>
+    </div>
+
+    <label for="username" class="form-label">Username</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="user[username]" id="username" placeholder="Username" aria-label="username" required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+        <div class="invalid-feedback">
+            This field cannot be empty
+        </div>
+    </div>
+
+
+    <label for="phone" class="form-label">Phone</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="user[phone]" id="phone" placeholder="Phone Number"
+            aria-label="phone" required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+        <div class="invalid-feedback">
+            This field cannot be empty
+        </div>
+    </div>
+
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group mb-3">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" aria-label="password" required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+        <div class="invalid-feedback">
+            This field cannot be empty
+        </div>
+    </div>
+
+    <button class="btn btn-success mb-3">Register</button>
+</form>
+

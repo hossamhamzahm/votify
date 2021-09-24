@@ -12,10 +12,15 @@
 
     <%- include('../partials/navbar.ejs'); %> 
 
-    <main>
-        <div class="container-fluid mt-5">
-            <%- include('../partials/flash.ejs'); %> 
-            <%- body %>
+    <main class="justify-self-center">
+        <div class="container-fluid mt-3">
+        <div class="container d-flex ">
+            <div class="mx-auto mb-3 col-12 col-md-9 col-lg-6">
+                <%- include('../partials/flash.ejs'); %> 
+                <div class="my-5"></div>
+                <%- body %>
+            </div>
+        </div>
         </div>
     </main>
 

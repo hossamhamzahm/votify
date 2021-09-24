@@ -1,9 +1,13 @@
 const Poll = require('../modules/polls');
 const Opt = require('../modules/opts');
 
-module.exports.editOpts = async (req, res) => {
+module.exports.editOpts = async (req, res, next) => {
     const poll = await Poll.findById(req.params.id);
     const req_opts = req.body.opts;
+
+    if (!poll) {
+        return new next(ExpressError(`Couldn't find poll id ${req.params.id}`, 404));
+    }
 
     poll.total_num = 0
     let idx = 0
@@ -25,9 +29,17 @@ module.exports.editOpts = async (req, res) => {
     res.redirect(`/polls/${req.params.id}`)
 };
 
-module.exports.removeOpt = async (req, res) => {
+module.exports.removeOpt = async (req, res, next) => {
     const poll = await Poll.findById(req.params.id);
     const opt = await Opt.findById(req.params.optId)
+
+
+    if (!poll) {
+        return new next(ExpressError(`Couldn't find poll id ${req.params.id}`, 404));
+    }
+    if (!opt) {
+        return new next(ExpressError(`Couldn't find opt id ${req.params.optId}`, 404));
+    }
 
     poll.opts.pull({ _id: req.params.optId });
     poll.total_num = parseInt(poll.total_num) - parseInt(opt.num_of_votes);
@@ -38,7 +50,7 @@ module.exports.removeOpt = async (req, res) => {
     res.status(200).send("Ok")
 };
 
-module.exports.newOpt = async (req, res) => {
+module.exports.newOpt = async (req, res, next) => {
     let req_opt = {
         val: req.body.text,
         num_of_votes: 0,
@@ -47,9 +59,12 @@ module.exports.newOpt = async (req, res) => {
     
     const poll = await Poll.findById(req.params.id);
     const opt = new Opt(req_opt);
+    
+    if (!poll) {
+        return new next(ExpressError(`Couldn't find poll id ${req.params.id}`, 404));
+    }
+
     poll.opts.push(opt);
-
-
     await poll.save()
     await opt.save()
     res.status(200).send("Ok")

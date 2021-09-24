@@ -1,5 +1,5 @@
-const User = require('./modules/users');
-const Poll = require('./modules/polls');
+const User = require('../modules/users');
+const Poll = require('../modules/polls');
 
 
 

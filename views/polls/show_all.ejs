@@ -1,26 +1,25 @@
 <% layout('layouts/boilerplate'); %> 
 
-<div class="container d-felx col-lg-8 mx-auto ">
-    <h1 class="display-6 mb-4">All Polls</h1>
-    
-    <% for(let poll of polls){ %> 
-        <div class="card mb-3">
-            <div class="card-header text-muted">
-                <div class="d-flex flex-row justify-content-between align-items-center">
-                    <p class="m-0">Poll created by you</p> 
-                    <span class="d-inline-flex">
-                        <a href="/polls/<%- poll.id %>/edit" class="m-1 p-1 btn text-muted"><i class="bi bi-sliders"></i></a>
-                    </span>
-                </div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><%- poll.title %></h5>
-                <p class="card-text"><%- poll.description %></p>
-                <button class="btn btn-outline-primary share-btn" data-id="<%-poll.id%>">Get Sharable Link</button>
-                <a href="/polls/<%-poll.id%>" class="btn btn-outline-success">Vote</a>
+<h1 class="display-6 mb-4">All Polls</h1>
+
+<% for(let poll of polls){ %> 
+    <div class="card mb-3">
+        <div class="card-header text-muted">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <p class="m-0">Poll created by you</p> 
+                <span class="d-inline-flex">
+                    <a href="/polls/<%- poll.id %>/edit" class="m-1 p-1 btn text-muted"><i class="bi bi-sliders"></i></a>
+                </span>
             </div>
         </div>
-    <% } %> 
-</div>
+        <div class="card-body">
+            <h5 class="card-title"><%- poll.title %></h5>
+            <p class="card-text"><%- poll.description %></p>
+            <button class="btn btn-outline-primary share-btn" data-id="<%-poll.id%>">Get Sharable Link</button>
+            <a href="/polls/<%-poll.id%>" class="btn btn-outline-success">Vote</a>
+        </div>
+    </div>
+<% } %> 
+
 
 <script src="/js/polls/show_all.js"></script>

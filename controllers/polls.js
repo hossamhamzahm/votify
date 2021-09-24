@@ -1,9 +1,10 @@
 const Poll = require('../modules/polls');
 const Opt = require('../modules/opts');
 const User = require('../modules/users');
+const ExpressError = require('../utils/ExpressError');
 
 
-module.exports.createPoll = async (req, res) => {
+module.exports.createPoll = async (req, res, next) => {
     req.body.poll["multi_opt"] = req.body.poll["multi_opt"] ? true : false;
     req.body.poll["add_opt"] = req.body.poll["add_opt"] ? true : false;
 
@@ -12,6 +13,10 @@ module.exports.createPoll = async (req, res) => {
     req.body.poll.total_num = 0;
     const poll = new Poll(req.body.poll);
     const user = await User.findById(req.user.id)
+
+    if(!user){
+        return new next(ExpressError(`Couldn't find user id ${req.user.id}`, 404));
+    }
 
     opts.forEach((opt, idx) => {
         opts[idx] = {
@@ -32,8 +37,13 @@ module.exports.createPoll = async (req, res) => {
 };
 
 
-module.exports.editPoll = async (req, res) => {
+module.exports.editPoll = async (req, res, next) => {
     const poll = await Poll.findById(req.params.id);
+
+    if(!poll){
+        return new next(ExpressError(`Couldn't find poll id ${req.params.id}`, 404));
+    }
+
     poll.title = req.body.poll.title;
     poll.description = req.body.poll.description;
     poll["multi_opt"] = req.body.poll["multi_opt"] ? true : false;
@@ -43,10 +53,17 @@ module.exports.editPoll = async (req, res) => {
 };
 
 
-module.exports.deletePoll = async (req, res) => {
+module.exports.deletePoll = async (req, res, next) => {
     const poll = await Poll.findById(req.params.id) //.populate('opts')
     const author = await User.findById(poll.author)
-    
+
+    if (!author) {
+        return new next(ExpressError(`Couldn't find user id ${req.user.id}`, 404));
+    }
+    if (!poll) {
+        return new next(ExpressError(`Couldn't find poll id ${req.params.id}`, 404));
+    }
+
     await Opt.deleteMany({ _id: { $in: poll.opts } })
     await author.updateOne({ $pull: { polls: { _id: { $in: poll.opts}}}})
     await Poll.findByIdAndDelete(req.params.id);
@@ -59,20 +76,35 @@ module.exports.renderNew = (req, res) => {
 };
 
 
-module.exports.renderEdit = async(req, res) => {
+module.exports.renderEdit = async(req, res, next) => {
     const poll = await Poll.findById(req.params.id).populate('opts')
+
+    if (!poll) {
+        return new next(ExpressError(`Couldn't find poll id ${req.params.id}`, 404))
+    }
+
     res.render('polls/edit', {poll});
 };
 
 
-module.exports.showAllPolls = async (req, res) => {
+module.exports.showAllPolls = async (req, res, next) => {
     const user = await User.findById(req.user.id).populate('polls');
+
+    if (!user) {
+        return new next(ExpressError(`Couldn't find user id ${req.user.id}`, 404))
+    }
+
     const polls = user.polls;
     res.render("polls/show_all", { polls });
 };
 
-module.exports.show = async (req, res) => {
+module.exports.show = async (req, res, next) => {
     const poll = await Poll.findById(req.params.id).populate('opts').populate('author');
-    res.render('polls/show', {poll});
+    console.log("right request")
+    if (!poll) {
+        console.log("right request")
+        return next(new ExpressError(`Couldn't find poll id ${req.params.id}`, 404))
+    }
+    else res.render('polls/show', {poll});
 };
 

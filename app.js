@@ -11,6 +11,7 @@ const flash = require('connect-flash')
 const passport =require('passport')
 const localStrategy = require('passport-local')
 const User = require('./modules/users')
+const ExpressError = require('./utils/ExpressError');
 const app = express();
 
 
@@ -73,9 +74,15 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 // Not found route
-app.get('*', (req, res) => {
-    res.send("Error 404, page not found");
+app.get('*', (req, res, next) => {
+    next(new ExpressError("Error 404, Page Not Found", 404))
 });
+
+// errors middleware
+app.use((err, req, res, next)=>{
+    const {status = 500} = err
+    res.status(status).render('error', {err})
+})
 
 
 const port = process.env.port || 3000;

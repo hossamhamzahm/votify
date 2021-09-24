@@ -1,22 +1,21 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 const pollsController = require('../controllers/polls');
-const { isLogged, isPollAuthor } = require('../middleware');
+const catchAsync = require('../utils/catchAsync')
+const { isLogged, isPollAuthor } = require('../utils/middleware');
 
-// showing polls routes
 router.get('/', isLogged, pollsController.showAllPolls);
-router.get('/:id', pollsController.show);
-
-// Creating new polls
 router.get('/new', isLogged, pollsController.renderNew);
-router.post('/', isLogged, pollsController.createPoll);
+router.get('/:id', catchAsync(pollsController.show));
+
+router.post('/', isLogged, catchAsync(pollsController.createPoll));
 
 // Editing polls
-router.get('/:id/edit', isLogged, isPollAuthor, pollsController.renderEdit);
-router.put('/:id', isLogged, isPollAuthor, pollsController.editPoll);
+router.get('/:id/edit', isLogged, catchAsync(isPollAuthor), catchAsync(pollsController.renderEdit));
+router.put('/:id', isLogged, catchAsync(isPollAuthor), catchAsync(pollsController.editPoll));
 
 // removing polls
-router.delete('/:id', isLogged, isPollAuthor, pollsController.deletePoll);
+router.delete('/:id', isLogged, catchAsync(isPollAuthor), catchAsync(pollsController.deletePoll));
 
 
 module.exports = router;

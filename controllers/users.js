@@ -1,21 +1,21 @@
 const User = require('../modules/users');
 
 
-module.exports.renderRegister = async (req, res) => {
+module.exports.renderRegister = (req, res) => {
     res.render(`users/register`)
 };
 
-module.exports.renderLogin = async (req, res) => {
+module.exports.renderLogin = (req, res) => {
     res.render(`users/login`)
 };
 
-module.exports.logout = async (req, res) => {
+module.exports.logout = (req, res) => {
     req.logout()
     req.flash('success', 'Logged out successfully')
     res.redirect(`/`)
 };
 
-module.exports.login = async (req, res) => {
+module.exports.login = (req, res) => {
     const redirectUrl = req.session.returnTo || '/polls'
     res.redirect(redirectUrl)
 };
