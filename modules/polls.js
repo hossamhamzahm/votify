@@ -39,6 +39,10 @@ const pollSchema = new Schema({
     multi_opt: {
         type: Boolean,
         required: true
+    },
+    allow_download: {
+        type: Boolean,
+        required: true
     }
 });
 

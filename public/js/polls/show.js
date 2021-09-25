@@ -8,6 +8,10 @@ const opt_creator_input = document.getElementById('opt-creator');
 const add_opt_btn = document.getElementById('add-opt-btn');
 
 const download_csv_link = document.getElementById('csv-link');
+const download_csv_opt_link = document.getElementById('csv-opt-link');
+const show_voters_modal = document.querySelector('#showVoters .modal-body')
+const ppl_icons = document.querySelectorAll('.ppl-icon')
+
 
 if (check_opt[0].getAttribute('type') === "radio"){
     prev_marked_radio = true
@@ -60,6 +64,27 @@ add_opt_btn.addEventListener('click', (e) => {
 });
 
 
+ppl_icons.forEach((ppl_icon, idx)=>{
+    ppl_icon.addEventListener('click', (e)=>{
+        const accordions = ppl_icon.querySelectorAll('.accordion-item');
+        if(!accordions.length){
+            show_voters_modal.innerHTML = `No one voted for this option`
+            return
+        }
+        else{
+            show_voters_modal.innerHTML = ``
+        }
+
+        accordions.forEach((accordion, idx)=>{
+            accordion.classList.remove('d-none');
+            show_voters_modal.innerHTML += accordion.outerHTML;
+            accordion.classList.add('d-none');
+        })
+
+    })
+})
+
+
 // a function to create and append new options
 async function create_opt(text) {
     const newElement = document.createElement('div');
@@ -102,7 +127,7 @@ function makeAlert() {
     newElement.outerHTML = `
         <div class="alert alert-warning alert-dismissible fade show position-absolute" role="alert"
         style="z-index: 1000; bottom: 20px; right:15px; overflow:auto;">
-            Copied the sharable link
+            Copied poll's link, id, and author
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
 
@@ -121,21 +146,52 @@ if(download_csv_link){
 }
 
 
-function export_csv(){
+
+if (download_csv_opt_link) {
+    download_csv_opt_link.addEventListener('click', (e) => {
+        export_opt_csv();
+    });
+}
+
+
+function export_csv() {
     let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Name,Vote\n";
+    csvContent += "Name,email,Vote\n";
 
     opts.forEach(function (opt, idx) {
-        for(let voter of opt.voters){
-            let row = `"${opt.val}","${voter.f_name} ${voter.l_name}"\n`;
-            csvContent += row ;
+        for (let voter of opt.voters) {
+            let row = `"${voter.f_name} ${voter.l_name}","${voter.email}","${opt.val}"\n`;
+            csvContent += row;
         }
     });
 
 
     let encodedUri = encodeURI(csvContent);
     download_csv_link.setAttribute("href", encodedUri);
-    download_csv_link.setAttribute("download", "my_data.csv");
+    download_csv_link.setAttribute("download", "poll_data.csv");
+}
 
-    // download_csv_link.click(); // This will download the data file named "my_data.csv".
+
+
+function export_opt_csv() {
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Name ,Email\n";
+
+    if(String(show_voters_modal.innerText) !==  "No one voted for this option"){
+        show_voters_modal.childNodes.forEach(function (accordion, idx) {
+            const name = accordion.innerText
+            let email = accordion.querySelector('.accordion-body').innerText
+            email = email.substring(email.indexOf(':')+2)
+            email = email.trimEnd()
+            let row = `"${name}","${email}"\n`;
+            csvContent += row;
+        });
+    }
+    else{
+        csvContent += "No one voted for this option\n";
+    }
+
+    let encodedUri = encodeURI(csvContent);
+    download_csv_opt_link.setAttribute("href", encodedUri);
+    download_csv_opt_link.setAttribute("download", "option_data.csv");
 }

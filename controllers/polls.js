@@ -3,10 +3,10 @@ const Opt = require('../modules/opts');
 const User = require('../modules/users');
 const ExpressError = require('../utils/ExpressError');
 
-
 module.exports.createPoll = async (req, res, next) => {
     req.body.poll["multi_opt"] = req.body.poll["multi_opt"] ? true : false;
     req.body.poll["add_opt"] = req.body.poll["add_opt"] ? true : false;
+    req.body.poll["allow_download"] = req.body.poll["allow_download"] ? true : false;
 
     const opts = req.body.poll.opts
     req.body.poll.opts = []
@@ -88,7 +88,12 @@ module.exports.renderEdit = async(req, res, next) => {
 
 
 module.exports.showAllPolls = async (req, res, next) => {
-    const user = await User.findById(req.user.id).populate('polls');
+    const user = await User.findById(req.user.id).populate({
+        path: 'polls',
+        populate: {
+            path: 'opts'
+        }
+    });
 
     if (!user) {
         return new next(ExpressError(`Couldn't find user id ${req.user.id}`, 404))
@@ -103,7 +108,7 @@ module.exports.show = async (req, res, next) => {
         path: 'opts',
         populate: {
             path: 'voters',
-            select:['f_name', 'l_name', '_id']
+            select:['f_name', 'l_name', 'email','_id']
         },
     }).populate('author');
 

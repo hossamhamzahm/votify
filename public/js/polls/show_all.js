@@ -1,4 +1,7 @@
 const share_btns = document.querySelectorAll('.share-btn');
+const download_csv_link = document.getElementById('csv-link');
+
+
 share_btns.forEach((share_btn, idx) => {
     share_btn.addEventListener('click', (e) => {
         const link = `${window.location.host}/polls/${share_btn.getAttribute("data-id")}`
@@ -25,4 +28,31 @@ function makeAlert(text) {
     }, 5000);
 
     return newElement;
+}
+
+
+if (download_csv_link) {
+    download_csv_link.addEventListener('click', (e) => {
+        export_csv();
+    });
+}
+
+
+function export_csv() {
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Name,Vote\n";
+
+    opts.forEach(function (opt, idx) {
+        for (let voter of opt.voters) {
+            let row = `"${opt.val}","${voter.f_name} ${voter.l_name}"\n`;
+            csvContent += row;
+        }
+    });
+
+
+    let encodedUri = encodeURI(csvContent);
+    download_csv_link.setAttribute("href", encodedUri);
+    download_csv_link.setAttribute("download", "my_data.csv");
+
+    // download_csv_link.click(); // This will download the data file named "my_data.csv".
 }
