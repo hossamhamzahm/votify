@@ -21,11 +21,15 @@ const optSchema = new Schema({
         type: Number,
         required: true
     },
-    poll:{
+    poll: {
         type: mongoose.Types.ObjectId,
         ref: 'Poll'
     },
-    voters: [voterSchema]
+    // voters: [voterSchema]
+    voters: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }]
 });
 
 

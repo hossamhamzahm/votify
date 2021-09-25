@@ -99,10 +99,15 @@ module.exports.showAllPolls = async (req, res, next) => {
 };
 
 module.exports.show = async (req, res, next) => {
-    const poll = await Poll.findById(req.params.id).populate('opts').populate('author');
-    console.log("right request")
+    const poll = await Poll.findById(req.params.id).populate({
+        path: 'opts',
+        populate: {
+            path: 'voters',
+            select:['f_name', 'l_name', '_id']
+        },
+    }).populate('author');
+
     if (!poll) {
-        console.log("right request")
         return next(new ExpressError(`Couldn't find poll id ${req.params.id}`, 404))
     }
     else res.render('polls/show', {poll});

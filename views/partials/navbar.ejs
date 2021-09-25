@@ -1,11 +1,46 @@
+<style>
+    #dropdownMenuButton1::before{
+        content: none;
+    }
+
+    .dropstart.nav-item{
+        order: 0;
+    }
+    @media screen and (min-width: 992px) {
+        .dropstart.nav-item{
+            order: 1;
+        }
+    }
+</style>
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container-fluid m-1">
+    <div class="container-fluid m-1 justify-content-start">
         <a class="navbar-brand" href="/">Votify</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="dropstart nav-item">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <% if(!currentUser){ %>
+                <i class="bi bi-person-plus"></i>
+                <% }else{ %>
+                <i class="bi bi-person-check"></i>
+                <% } %>
+            </button>
+            <ul class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton1" style="margin-right: -3.5rem;">
+                <% if(!currentUser){ %>
+                    <li><a class="dropdown-item" href="/login">login</a></li>
+                    <li><a class="dropdown-item" href="/register">register</a></li>
+                    <% }else{ %>
+                        <li><a class="dropdown-item" href="/logout">logout</a></li>
+                    <% } %>
+            </ul>
+        </div>
+
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0">
                 <li class="nav-item">
@@ -15,27 +50,16 @@
                     <a class="nav-link" href="/polls">Show</a>
                 </li>
             </ul>
-            <form id="poll_search_form" action="/polls/" class="d-flex" method="GET">
-                <input class="form-control me-2" name="poll_id" id="poll_id" type="search" placeholder="Enter Poll ID" aria-label="Search">
+
+            <form id="poll_search_form" action="/polls/" class="d-flex me-2" method="GET">
+                <input class="form-control me-1" name="poll_id" id="poll_id" type="search" placeholder="Enter Poll ID"
+                    aria-label="Search">
                 <button id="poll_search_btn" class="btn btn-outline-success" type="submit">Find</button>
             </form>
-            <% if(!currentUser){ %>
-                <ul class="navbar-nav my-2 ms-lg-3 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">register</a>
-                    </li>
-                </ul>
-            <% }else{ %> 
-                <ul class="navbar-nav my-2 ms-lg-3 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">logout</a>
-                    </li>
-                </ul>
-            <% } %> 
         </div>
+
+        
+
     </div>
 </nav>
 

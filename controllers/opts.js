@@ -14,7 +14,8 @@ module.exports.editOpts = async (req, res, next) => {
     for (let req_opt of req_opts.opt_id) {
         const opt = await Opt.findById(req_opt);
         if (opt.num_of_votes > req_opts.num_of_votes[idx]) {
-            opt.voters.pull({ _id: req.user.id })
+            console.log(opt.voters, req.user.id)
+            await opt.updateOne({ $pull: { voters: req.user.id }})
         }
         else if (opt.num_of_votes < req_opts.num_of_votes[idx]) {
             opt.voters.push({ _id: req.user.id })
@@ -56,6 +57,7 @@ module.exports.newOpt = async (req, res, next) => {
         num_of_votes: 0,
         poll: req.params.id
     }
+    
     
     const poll = await Poll.findById(req.params.id);
     const opt = new Opt(req_opt);
