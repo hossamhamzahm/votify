@@ -13,6 +13,7 @@
   "dependencies": {
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
+    "crypto-random-string": "^4.0.0",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "ejs-mate": "^3.0.0",
@@ -25,9 +26,11 @@
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^6.0.5",
     "node-html-to-image": "^3.2.0",
+    "nodemailer": "^6.6.5",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.1.0"
+    "passport-local-mongoose": "^6.1.0",
+    "random-string": "^0.2.0"
   }
 }

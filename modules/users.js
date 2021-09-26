@@ -31,6 +31,11 @@ const userSchema = new Schema({
     num_of_polls:{
         type: Number,
         required: true
+    },
+    verification_str: String,
+    is_verified: {
+        type: Boolean,
+        // required: true
     }
 });
 userSchema.plugin(passportLocalMongoose);

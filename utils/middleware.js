@@ -10,6 +10,12 @@ module.exports.isLogged = async (req, res, next) => {
         req.flash('error', 'You must be signed in');
         return res.redirect('/login');
     }
+
+    const user = await User.findById(req.user.id);
+    if(user.is_verified === false){
+        req.flash('error', 'You must verify your account, please check you email');
+        return res.redirect('/');
+    }
     next();
 };
 

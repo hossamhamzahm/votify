@@ -17,4 +17,7 @@ router.post('/login', passport.authenticate('local', {
     successFlash: 'Welcome back!'
 }), catchAsync(usersController.login));
 
+// account verification link
+router.get('/users/:verification_str', usersController.verifyAccount);
+
 module.exports = router;

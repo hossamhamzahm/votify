@@ -2,6 +2,22 @@
 
 <h1 class="display-6 mb-4">All Polls</h1>
 
+<% if(polls.length === 0){ %> 
+    <div class="card mb-3">
+        <div class="card-header text-muted">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <h2 class="m-0"><i class="bi bi-exclamation-triangle"></i></h2> 
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">There is no polls to show</h5>
+            <p class="card-text">Try creating more polls</p>
+            <a href="/polls/new" class="btn btn-outline-primary share-btn">Create Poll</a>
+            <a href="/" class="btn btn-outline-success">Go to home page</a>
+        </div>
+    </div> 
+<% } %> 
+
 <% for(let poll of polls){ %> 
     <div class="card mb-3">
         <div class="card-header text-muted">
