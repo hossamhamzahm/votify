@@ -46,8 +46,8 @@ module.exports.editPoll = async (req, res, next) => {
 
     poll.title = req.body.poll.title;
     poll.description = req.body.poll.description;
-    poll["multi_opt"] = req.body.poll["multi_opt"] ? true : false;
     poll["add_opt"] = req.body.poll["add_opt"] ? true : false;
+    poll["allow_download"] = req.body.poll["allow_download"] ? true : false;
     await poll.save()
     res.redirect(`/polls/${req.params.id}/`)
 };

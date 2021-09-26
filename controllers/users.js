@@ -43,8 +43,8 @@ module.exports.createUser = async (req, res, err) => {
     req.login(newUser, (err)=>{
         if(err) next(err);
     });
-
-    res.redirect(`/polls`);
+    req.flash('success', 'Verification email has been sent to you, please go to your email to verify your account.')
+    res.redirect(`/`);
 };
 
 

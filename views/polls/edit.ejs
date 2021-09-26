@@ -53,10 +53,17 @@
         </div>
 
         <div class="form-check ms-2 my-3">
-            <input class="form-check-input fs-5" type="checkbox" name="poll[add_opt]" id="flexCheckChecked"
-                <%- poll.add_opt ? "checked" : '' %>>
+            <input class="form-check-input fs-5" type="checkbox" name="poll[add_opt]" id="flexCheckChecked" <%- poll.add_opt
+                ? "checked" : '' %>>
             <label class="form-check-label align-middle" for="flexCheckChecked">
                 Allow others to add additional options
+            </label>
+        </div>
+        <div class="form-check ms-2 my-3">
+            <input class="form-check-input fs-5" type="checkbox" name="poll[allow_download]" id="flexCheckChecked" <%- poll.allow_download
+                ? "checked" : '' %>>
+            <label class="form-check-label align-middle" for="flexCheckChecked">
+                Allow others to download CSV data
             </label>
         </div>
 

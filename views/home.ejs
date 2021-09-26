@@ -105,9 +105,13 @@
         </p>
         <a href="/polls/new" class="btn btn-light mb-3">Create Poll</a>
         <br>
+        <% if(!currentUser){ %>
         <a href="/register" class="link link-light">Register</a> 
         <span class="text-light">/</span>
         <a href="/login" class="link link-light">Log in</a>
+        <% }else{ %>
+        <a href="/polls" class="link link-light">Show Polls</a>
+        <% } %> 
     </main>
 
     <div class="footer bg-transparent py-3 mx-3 mt-auto">
