@@ -7,13 +7,19 @@ const polls_router = require('./routes/polls');
 const opts_router = require('./routes/opts');
 const users_router = require('./routes/users');
 const session = require('express-session')
-const flash = require('connect-flash')
-const passport =require('passport')
+const flash = require('connect-flash');
+const passport =require('passport');
 const localStrategy = require('passport-local')
-const User = require('./modules/users')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const MongoDbStore = require('connect-mongo');
+const User = require('./modules/users');
 const ExpressError = require('./utils/ExpressError');
 const app = express();
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+} 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/votify';
 
@@ -30,16 +36,37 @@ mongoose.connection.once('open', () => console.log("Connected to Mongo successfu
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, "views"))
+app.set('views', path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(express.json())
+app.use(express.json());
+
+
+app.use(mongoSanitize());
+app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "script-src": ["'self'", "'unsafe-inline'"],
+            "style-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        },
+    })
+);
+
+
+const store = MongoDbStore.create({
+    mongoUrl: dbUrl,
+    secret: process.env.SECRET || "thisshouldbebettersecret",
+    touchAfter: 24 * 3600 // time period in seconds
+});
+store.on('error', (e) => console.log("Session Error: \n", e));
+
 
 const sessionConfig = {
-    // name: 'blah',
-    // store: store,
-    secret: process.env.SECRET || "this is a secret",
+    store,
+    secret: process.env.SECRET || "thisshouldbebettersecret",
     resave: false,
     saveUninitialized: true,
     cookie: {
