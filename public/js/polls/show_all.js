@@ -13,21 +13,17 @@ share_btns.forEach((share_btn, idx) => {
 });
 
 
-function makeAlert(text) {
-    const newElement = document.createElement('span');
-    document.body.appendChild(newElement);
-    newElement.outerHTML = `
-        <div class="alert alert-warning alert-dismissible fade show position-absolute" role="alert"
-        style="z-index: 1000; bottom: 20px; right:15px; overflow:auto;">
-            Copied the sharable link
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>`;
+
+function makeAlert() {
+    const toast = document.querySelector('.toast');
+    toast.classList.remove('hide');
+    toast.classList.add('show');
+
 
     setTimeout(() => {
-        document.querySelector('.alert.alert-warning.alert-dismissible.fade.show.position-absolute').remove();
+        document.querySelector('.toast').classList.remove('show');
+        document.querySelector('.toast').classList.add('hide');
     }, 5000);
-
-    return newElement;
 }
 
 

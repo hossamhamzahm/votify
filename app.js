@@ -44,16 +44,16 @@ app.use(express.json());
 
 
 app.use(mongoSanitize());
-// app.use(helmet());
-// app.use(
-//     helmet.contentSecurityPolicy({
-//         useDefaults: true,
-//         directives: {
-//             "script-src": ["'self'", "'unsafe-inline'"],
-//             "style-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-//         },
-//     })
-// );
+app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "script-src": ["'self'", "'unsafe-inline'"],
+            "style-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        },
+    })
+);
 
 
 const store = MongoDbStore.create({
