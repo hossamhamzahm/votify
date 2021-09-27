@@ -45,7 +45,7 @@
 <body class="d-flex flex-column">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top bg-transparent">
         <div class="container-fluid mx-3 justify-content-start">
-            <a class="navbar-brand" href="/">Votify</a>
+            <a class="navbar-brand" href="/">Votify <i class="bi bi-check-all"></i></a>
             <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -74,10 +74,13 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/polls/new">Create</a>
+                        <a class="nav-link" aria-current="page" href="/polls/new">Create</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/polls">Show</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/learn">Lean How It Works</a>
                     </li>
                 </ul>
     
@@ -99,24 +102,25 @@
     </div>
 
     <main class="my-auto align-self-center text-center container">
-        <h3 class="display-5 text-light">Votify</h3>
+        <h3 class="display-5 text-light">Votify <i class="bi bi-check-all"></i></h3>
         <p class="text-light lead">
             A place where you can get others opinion and share yours!
         </p>
-        <a href="/polls/new" class="btn btn-light mb-3">Create Poll</a>
+        <a href="/learn" class="btn btn-light mb-3">Lean How It Works</a>
         <br>
         <% if(!currentUser){ %>
-        <a href="/register" class="link link-light">Register</a> 
+        <a href="/register" class="link-light">Register</a> 
         <span class="text-light">/</span>
-        <a href="/login" class="link link-light">Log in</a>
+        <a href="/login" class="link-light">Log in</a>
         <% }else{ %>
-        <a href="/polls" class="link link-light">Show Polls</a>
+        <a href="/polls" class="link-light">Show Polls</a>
         <% } %> 
+        <p><a class="link-light" href="/polls/new">Create Poll</a></p>
     </main>
 
     <div class="footer bg-transparent py-3 mx-3 mt-auto">
     <div class="container-fluid">
-        <p class="text-light mb-0">&copy; Votify 2021</p>
+        <p class="text-light mb-0">&copy; Votify <i class="bi bi-check-all"></i> 2021</p>
         <p class="text-secondary mb-0">Designed by 
             <a target="_blank" href="https://hossamhamzahm.github.io" class="text-secondary">
             Hossam Hamza</a>

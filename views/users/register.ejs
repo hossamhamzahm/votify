@@ -76,7 +76,51 @@
         </div>
     </div>
 
+    <label for="confirm_password" class="form-label">Confirm Password</label>
+    <div class="input-group mb-3">
+        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Password confirmation"
+            aria-label="password confirmation" onkeyup='check();' required>
+        <div class="valid-feedback confirm_password">
+            Passwords Match
+        </div>
+        <div class="invalid-feedback confirm_password">
+            passwords don't match
+        </div>
+    </div>
+
     <button class="btn btn-success mb-3">Register</button>
 </form>
 
 <p>Already having an account <a href="/login">Log in</a></p>
+
+
+<script>
+    var check = function () {
+        if (document.getElementById('password').value ==
+            document.getElementById('confirm_password').value) {
+            document.querySelector('.valid-feedback.confirm_password').classList.remove('d-none');
+            if (document.querySelector('.invalid-feedback.confirm_password').classList.contains('d-block'))
+                document.querySelector('.invalid-feedback.confirm_password').classList.remove('d-block');
+            if(!document.querySelector('.valid-feedback.confirm_password').classList.contains('d-block'))
+                document.querySelector('.valid-feedback.confirm_password').classList.add('d-block');
+        
+        } else {
+            if(!document.querySelector('.valid-feedback.confirm_password').classList.contains('d-none'))
+                document.querySelector('.valid-feedback.confirm_password').classList.add('d-none');
+            if (document.querySelector('.valid-feedback.confirm_password').classList.contains('d-block'))
+                document.querySelector('.valid-feedback.confirm_password').classList.remove('d-block');
+            if (!document.querySelector('.invalid-feedback.confirm_password').classList.contains('d-block'))
+                document.querySelector('.invalid-feedback.confirm_password').classList.add('d-block');
+
+            }
+        }
+        document.querySelector('form[action="/register"]').addEventListener('submit', function(e){
+            if(document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                    console.log('passwords do not match')
+            }
+            else{
+                    e.preventDefault()
+            }
+        });
+</script>

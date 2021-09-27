@@ -2,6 +2,11 @@ const opt_div  = document.getElementById('opts-div');
 const opt_creator_input = document.getElementById('opt-creator');
 const add_opt_btn = document.getElementById('add-opt-btn');
 
+
+const show_link = document.querySelectorAll('#navbarScroll ul li a');
+show_link[0].classList.add('active')
+
+
 // create a new option after pressing enter
 opt_creator_input.addEventListener('keypress', (e)=>{
     if(e.key=="Enter"){

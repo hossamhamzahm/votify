@@ -13,6 +13,10 @@ const show_voters_modal = document.querySelector('#showVoters .modal-body')
 const ppl_icons = document.querySelectorAll('.ppl-icon')
 
 
+const show_link = document.querySelectorAll('#navbarScroll ul li a');
+show_link[1].classList.add('active')
+
+
 if (check_opt[0].getAttribute('type') === "radio"){
     prev_marked_radio = true
 }

@@ -1,0 +1,156 @@
+<%- layout('layouts/boilerplate.ejs') %>
+
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <a href="/polls/6150db2e7b9870faec8ebfc0" class="text-primary align-middle">
+        <i class="bi bi-info-circle me-1 text-decoration-none"></i> 
+    See sample poll</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<h1 class="display-6 mb-3">How to use Votify <i class="bi bi-check-all"></i></h1>
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                1- Create an account and verify it
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h6 class="mt-3">Firstly register a new user</h6> 
+                <p>
+                    This can be done from either the user icon in the top of the page or through the 
+                    <a class="link-primary" href="/register">registration link</a> 
+                    in Votify home page. After creating the account check your email inbox to verify the account. Congratulations, now you can <a href="/polls/new" class="link-primary"> create new polls</a> from the create link in the navbar.
+                </p>
+                    <img src="/images/how_to_use/1.png" loading="lazy" class="mt-4 img-fluid" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                2- Show all of your polls and their settings
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h6 class="mt-3">1- Showing all polls</h6>
+                <p>
+                    This can be done be clicking on the
+                    <a class="link-primary" href="/polls">polls link</a>
+                    in circle number 1.
+                </p>
+                <h6 class="mt-3">2- Show poll settings and edit it</h6>
+                <p>
+                    This can be done be clicking on the slider icon in circle number 2.
+                </p>
+                <h6 class="mt-3">3- Poll sharing</h6>
+                <p>
+                    This can be done be clicking on "get sharable link" button in circle number 3.
+                    after clicking on the button a link similar to the one below will be copied to your clipboard. <code>https://www.votify.com/polls/6150db2e7b9870faec8ebfc0</code>
+                </p>
+                <h6 class="mt-3">4- Vote in the poll</h6>
+                <p>
+                    This can be done be clicking on "show poll" button in circle number 4.
+                    after clicking on the button a you will be redirected to the poll page, as the one shown in the next accordion, where you can vote and see others' votes.
+                </p>
+                <img src="/images/how_to_use/2.png" loading="lazy" class="mt-4 img-fluid" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                aria-expanded="true" aria-controls="collapseFour">
+                3- Find a specific poll
+            </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h6 class="mt-3">Finding a specific poll</h6> 
+                <p>
+                    This can be done from either the search box in the navbar where you enter poll's id like <code>6150db2e7b9870faec8ebfc0</code> or through visiting a sharable link.
+                </p>
+                    <img src="/images/how_to_use/5.png" loading="lazy" class="mt-4 img-fluid" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                4- Poll voting page
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h6 class="mt-3">1- poll Author</h6>
+                <p>
+                    This is the name in circle number 1.
+                </p>
+                <h6 class="mt-3">2- Download poll data csv file</h6>
+                <p>
+                    This can be done be clicking on the download icon in circle number 2. After clicking this icon a csv file, a file similar to Excel sheet, containing the voters and the chosen options will be downloaded on your device.
+                </p>
+
+                <h6 class="mt-3">3- Show poll settings and edit it</h6>
+                <p>
+                    This can be done be clicking on the slider icon in circle number 3.
+                </p>
+
+                <h6 class="mt-3">4- Option voters </h6>
+                <p>
+                    you can see who voted for each option by clicking on the people icon or the percentage in circle number 4. You can view a sample image by clicking on the show options voters image link below.
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Show option voters image
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                <img src="/images/how_to_use/4.png" loading="lazy" class="mt-4 img-fluid" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <h6 class="mt-3">5- Get poll info</h6>
+                <p>
+                    This can be done be clicking on "Get poll info" button in circle number 5.
+                    After clicking on the button, a text similar to the one below will be copied to your clipboard.
+                    <br>
+                    <code>Poll author: Votify Admin
+                    <br>
+                    Poll id: 6150db2e7b9870faec8ebfc0
+                    <br>
+                    URL: https://www.votify.com/polls/6150db2e7b9870faec8ebfc0
+                    </code>
+                </p>
+                <h6 class="mt-3">6- Voting</h6>
+                <p>
+                    This can be done be checking the options you want and then click on "Submit Vote" button as shown in circle 6.
+                </p>
+                <img src="/images/how_to_use/3.png" loading="lazy" class="mt-4 img-fluid" alt="...">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const show_link = document.querySelectorAll('#navbarScroll ul li a');
+    show_link[2].classList.add('active')
+</script>

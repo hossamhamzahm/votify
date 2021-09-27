@@ -1,6 +1,6 @@
 const share_btns = document.querySelectorAll('.share-btn');
 const download_csv_link = document.getElementById('csv-link');
-
+const show_link = document.querySelectorAll('#navbarScroll ul li a');
 
 share_btns.forEach((share_btn, idx) => {
     share_btn.addEventListener('click', (e) => {
@@ -53,6 +53,7 @@ function export_csv() {
     let encodedUri = encodeURI(csvContent);
     download_csv_link.setAttribute("href", encodedUri);
     download_csv_link.setAttribute("download", "my_data.csv");
-
-    // download_csv_link.click(); // This will download the data file named "my_data.csv".
 }
+
+
+show_link[1].classList.add('active')
