@@ -1,2 +1,3 @@
 node_modules
 .env
+heroku_vars_config.sh

@@ -44,16 +44,16 @@ app.use(express.json());
 
 
 app.use(mongoSanitize());
-// app.use(helmet());
-// app.use(
-//     helmet.contentSecurityPolicy({
-//         useDefaults: true,
-//         directives: {
-//             "script-src": ["'self'", "'unsafe-inline'"],
-//             "style-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-//         },
-//     })
-// );
+app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "script-src": ["'self'", "'unsafe-inline'"],
+            "style-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        },
+    })
+);
 
 
 const store = MongoDbStore.create({
@@ -115,6 +115,6 @@ app.use((err, req, res, next)=>{
 })
 
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, ()=>console.log(`Listening on port ${port}`));
 
