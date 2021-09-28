@@ -79,7 +79,7 @@
     <label for="confirm_password" class="form-label">Confirm Password</label>
     <div class="input-group mb-3">
         <input type="password" class="form-control" id="confirm_password" placeholder="Password confirmation"
-            aria-label="password confirmation" onkeyup='check();' required>
+            aria-label="password confirmation" required>
         <div class="valid-feedback confirm_password">
             Passwords Match
         </div>
@@ -112,6 +112,9 @@
             if (!document.querySelector('.invalid-feedback.confirm_password').classList.contains('d-block'))
                 document.querySelector('.invalid-feedback.confirm_password').classList.add('d-block');
 
+            if (document.querySelector('.invalid-feedback.confirm_password').classList.contains('d-none'))
+                document.querySelector('.invalid-feedback.confirm_password').classList.remove('d-none');
+
             }
         }
         document.querySelector('form[action="/register"]').addEventListener('submit', function(e){
@@ -123,4 +126,6 @@
                     e.preventDefault()
             }
         });
+
+        document.getElementById('confirm_password').addEventListener('keyup', ()=> check())
 </script>

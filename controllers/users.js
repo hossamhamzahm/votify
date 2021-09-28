@@ -58,5 +58,5 @@ module.exports.verifyAccount = async (req, res, err) => {
     user.is_verified = true;
     await user.save();
     req.flash('success', 'Account verified successfully');
-    res.redirect(`/polls`);
+    res.redirect(`/`);
 };
