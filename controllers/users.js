@@ -18,10 +18,6 @@ module.exports.logout = (req, res) => {
     res.redirect(`/`)
 };
 
-module.exports.login = (req, res) => {
-    const redirectUrl = req.session.returnTo || '/polls'
-    res.redirect(redirectUrl)
-};
 
 module.exports.createUser = async (req, res, err) => {
     req.body.user.polls = [];

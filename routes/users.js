@@ -11,11 +11,23 @@ router.get('/logout', usersController.logout);
 
 // Logging in
 router.get('/login', usersController.renderLogin);
-router.post('/login', passport.authenticate('local', {
-    failureRedirect: '/login',
-    failureFlash: true,
-    successFlash: 'Welcome back!'
-}), catchAsync(usersController.login));
+router.post('/login', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if(err) return next(err);
+
+        if (!user) { 
+            req.flash('failure', 'You must be signed in')
+            return res.redirect('/login'); 
+        }
+
+        req.logIn(user, function (err) {
+            if (err) return next(err);
+            req.flash('success', 'Welcome back!')
+            return res.redirect(req.session.returnTo || '/polls');
+        });
+    })(req, res, next);
+});
+
 
 // account verification link
 router.get('/users/:verification_str', usersController.verifyAccount);
