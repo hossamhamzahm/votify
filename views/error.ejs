@@ -14,8 +14,8 @@
     <a href="/" class="lead link-light d-inline-block mb-2">Go back to home page</a>
     <div class="alert alert-danger mx-auto my-auto p-4" role="alert">
         <h4 class="alert-heading text-break text-wrap"><%- err.message %></h4>
-        <% if(process.env.NODE_ENV != 'production'){ %> 
+        <% //if(process.env.NODE_ENV != 'production'){ %> 
             <p class="text-wrap text-break"><%- err.stack %></p>
-        <% } %> 
+        <% //} %> 
     </div>
 
