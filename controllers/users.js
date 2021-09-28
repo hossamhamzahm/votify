@@ -35,10 +35,12 @@ module.exports.createUser = async (req, res, err) => {
 
     const verification_link = `${req.protocol}://${req.hostname}/users/${req.body.user.verification_str}`
     await send(user.email, user.f_name, verification_link)
-    
+    console.log("create user before login")
     req.login(newUser, (err)=>{
         if(err) next(err);
+        console.log("create user in login middleware")
     });
+    console.log("create user after login")
     req.flash('success', 'Verification email has been sent to you, please go to your email to verify your account.')
     res.redirect(`/`);
 };
