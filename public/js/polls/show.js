@@ -194,3 +194,14 @@ function export_opt_csv() {
     download_csv_opt_link.setAttribute("href", encodedUri);
     download_csv_opt_link.setAttribute("download", "option_data.csv");
 }
+
+
+const opt_labels = document.querySelectorAll('.opt-label');
+function fix_opts(){
+    for (let label of opt_labels) {
+        label.querySelector('.opt-span').style.width = label.clientWidth + "px";
+        label.style.height = label.querySelector('.opt-span').clientHeight + "px";
+    }
+};
+fix_opts();
+window.addEventListener('resize', fix_opts);

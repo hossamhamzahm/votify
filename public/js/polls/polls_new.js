@@ -1,7 +1,7 @@
 const opt_div  = document.getElementById('opts-div');
 const opt_creator_input = document.getElementById('opt-creator');
 const add_opt_btn = document.getElementById('add-opt-btn');
-
+const form = document.querySelector('form[action="/polls"]');
 
 const show_link = document.querySelectorAll('#navbarScroll ul li a');
 show_link[0].classList.add('active')
@@ -43,3 +43,14 @@ function create_opt(text){
 
     opt_div.appendChild(newElement);
 }
+
+
+form.addEventListener('submit', (e)=>{
+    if(opt_creator_input.value == ""){
+    }
+    else{
+        const text = opt_creator_input.value;
+        opt_creator_input.value = "";
+        create_opt(text);
+    }
+})
